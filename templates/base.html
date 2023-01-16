@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Money Rails</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+</head>
+
+<body>
+    <section class="hero is-info is-fullheight is-small">
+        <div class="hero-head has-background-link">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="{{ url_for('main.index') }}">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3539/3539035.png" alt="Rails Logo">
+                            <h1 class="title is-4 has-text-white">Money Rails</h1>
+                        </a>
+                    </div>
+                </div>
+
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="{{ url_for('main.index') }}" class="navbar-item">
+                                Home
+                            </a>
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                                Profile
+                            </a>
+
+                            <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+                                <div class="navbar-item has-dropdown is-hoverable has-background-info">
+                                    <a class="navbar-link has-background-link has-text-white is-arrowless">
+                                        Expenses
+                                    </a>
+                                
+                                    <div class="navbar-dropdown has-background-link">
+                                        <a href="{{ url_for('expenses.addExpense') }}" class="navbar-item">
+                                            Add Expense
+                                        </a>
+                                        <hr class="navbar-divider">
+                                        <a href="{{ url_for('expenses.yearlyExpenses') }}" class="navbar-item">
+                                            Yearly Expenses
+                                        </a>
+
+                                        <a href="{{ url_for('expenses.monthlyExpenses') }}" class="navbar-item">
+                                            Monthly Expenses
+                                        </a>
+                                    </div>
+                                </div>
+                              </nav>
+
+                            {% endif %}
+                            {% if not current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                                Login
+                            </a>
+                            <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                                Sign Up
+                            </a>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                                Logout
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="hero-body">
+            <div class="container">
+               {% block content %}
+               {% endblock %}
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>

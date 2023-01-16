@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title is-3 has-text-centered">
+  Welcome, {{ name }}!
+</h1>
+
+<p class="subtitle">
+  There are you expenses:
+</p>
+
+<div>
+
+  <table class="table is-bordered table is-fullwidth has-background-link has-text-centered">
+    <thead>
+      <tr>
+        <th>Expense</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Category</th>
+      </tr>
+
+    </thead>
+
+    <tbody>
+      {% for expense in expensesList %}
+      <tr>
+        <td>{{ expense.name }}</td>
+        <td>{{ expense.amount }}</td>
+        <td>{{ expense.date }}</td>
+        <td>{{ expense.category }}</td>
+        <td><a href="/updateExpense/{{ expense.id }}" class="button is-info">Update</a></td>
+        <td><a href="/deleteExpense/{{ expense.id }}" class="button is-info">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+
+</div>
+{% endblock %}
