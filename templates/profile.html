@@ -11,13 +11,13 @@
 
 <div>
 
-  <table class="table is-bordered table is-fullwidth has-background-link has-text-centered">
+  <table class="table is-bordered is-fullwidth has-background-black has-text-white has-text-centered">
     <thead>
       <tr>
-        <th>Expense</th>
-        <th>Amount</th>
-        <th>Date</th>
-        <th>Category</th>
+        <th class="has-text-white">Expense</th>
+        <th class="has-text-white">Amount</th>
+        <th class="has-text-white">Date</th>
+        <th class="has-text-white">Category</th>
       </tr>
 
     </thead>
@@ -29,8 +29,8 @@
         <td>{{ expense.amount }}</td>
         <td>{{ expense.date }}</td>
         <td>{{ expense.category }}</td>
-        <td><a href="/updateExpense/{{ expense.id }}" class="button is-info">Update</a></td>
-        <td><a href="/deleteExpense/{{ expense.id }}" class="button is-info">Delete</a></td>
+        <td><a href="/updateExpense/{{ expense.id }}" class="button is-dark">Update</a></td>
+        <td><a href="/deleteExpense/{{ expense.id }}" class="button is-dark">Delete</a></td>
       </tr>
       {% endfor %}
     </tbody>
