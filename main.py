@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, Flask
 from flask_login import login_required, current_user
 from pickle import dumps, loads
-from .expenses import ExpensesList
-from . import create_app
+from expenses import ExpensesList
 
 main = Blueprint('main', __name__)
 
