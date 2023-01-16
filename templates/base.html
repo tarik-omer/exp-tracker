@@ -21,10 +21,16 @@
                             <img src="https://cdn-icons-png.flaticon.com/512/3539/3539035.png" alt="Rails Logo">
                             <h1 class="title is-4 has-text-white">Money Rails</h1>
                         </a>
+
+                        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                            data-target="navbarMenuHeroA" id="burger">
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
                     </div>
                 </div>
 
-                    <div id="navbarMenuHeroA" class="navbar-menu">
+                    <div id="navbarMenuHeroA" class="navbar-menu" id="nav-links">
                         <div class="navbar-end">
                             <a href="{{ url_for('main.index') }}" class="navbar-item">
                                 Home
@@ -56,6 +62,7 @@
                                 </div>
                               </nav>
 
+
                             {% endif %}
                             {% if not current_user.is_authenticated %}
                             <a href="{{ url_for('auth.login') }}" class="navbar-item">
@@ -70,6 +77,8 @@
                                 Logout
                             </a>
                             {% endif %}
+
+                            
                         </div>
                     </div>
                 </div>
@@ -84,6 +93,23 @@
         </div>
 
     </section>
+
+    <script>
+        <!-- Burger Menu -->
+        document.addEventListener('DOMContentLoaded', () => {
+            (document.querySelectorAll('.navbar-burger') || []).forEach( el => {
+                el.addEventListener('click', () => {
+                    let target = el.dataset.target;
+                    let $target = document.getElementById(target);
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+                });
+            });
+        });
+
+
+    </script>
+
 </body>
 
 </html>
