@@ -17,7 +17,7 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.init_app(main)
 
-    from .models import User
+    from models import User
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -25,15 +25,15 @@ def create_app():
         return User.query.get(int(user_id))
     
     #blueprint for expenses
-    from .expenses import expenses as expenses_blueprint
+    from expenses import expenses as expenses_blueprint
     main.register_blueprint(expenses_blueprint)
 
     # blueprint for auth routes in our app
-    from .auth import auth as auth_blueprint
+    from auth import auth as auth_blueprint
     main.register_blueprint(auth_blueprint)
 
     # blueprint for non-auth parts of app
-    from .main import main as main_blueprint
+    from main import main as main_blueprint
     main.register_blueprint(main_blueprint)
 
 
