@@ -91,7 +91,6 @@ def updateExpense(id):
     expense = expenses_list.getExpense(id)
     
     if expense == None:
-        print("Expense not found")
         return redirect(url_for('main.profile'))
     
     if request.method == 'POST':
@@ -189,6 +188,35 @@ def monthlyExpenses():
 
     return render_template('monthlyExpenses.html', labels=days, values=expenses_amounts, month=getMonth(current_month))
 
+@expenses.route('/monthlyExpenses/<month>')
+@login_required
+def monthlyExpenses_other(month):
+    # get current month in format "xx"
+    current_month = getMonthDigit(month)
+
+    # get number of days in current month    
+    num_days = monthrange(int(date.today().strftime("%Y")), int(current_month))[1]
+    
+    # get list of days in current month
+    days = [day for day in range(1, int(num_days) + 1)]
+    
+    
+    # get expenses from current month
+    expenses_list = loads(current_user.expenses).expenses
+
+    # create list of expenses amounts for each day
+    expenses_amounts = [0 for i in range(1, int(num_days) + 1)]
+    
+    # for each expense
+    for expense in expenses_list:
+        # if expense is from this month
+        if int(expense.date.split('-')[1]) == int(current_month):
+            if int(expense.date.split('-')[2]) in days:
+                # add expense amount to the corresponding day
+                expenses_amounts[int(expense.date.split('-')[2]) - 1] += int(expense.amount.split()[0])
+
+    return render_template('monthlyExpenses.html', labels=days, values=expenses_amounts, month=month)
+
 def getMonth(month):
     switcher = {
         "01": "January",
@@ -204,5 +232,23 @@ def getMonth(month):
         "11": "November",
         "12": "December"
     }
-    
     return switcher.get(month, "Invalid month")
+    
+    
+def getMonthDigit(month):
+    switcher = {
+        "January": "01",
+        "February": "02",
+        "March": "03",
+        "April": "04",
+        "May": "05",
+        "June": "06",
+        "July": "07",
+        "August": "08",
+        "September": "09",
+        "October": "10",
+        "November": "11",
+        "December": "12"
+    }
+    return switcher.get(month, "Invalid month")
+    
