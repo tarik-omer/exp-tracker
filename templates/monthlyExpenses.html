@@ -7,22 +7,77 @@
 
 <div class="is-centered">
     <h1 class="subtitle has-text-weight-bold">Monthly Report</h1>
+    
+    <p class="is-size-4">Here is the monthly report for {{ month }}</p>
 
-    <p>Here is the monthly report for {{ month }}</p>
-<canvas id="monthlyReport"></canvas>
+    <div class="dropdown is-hoverable">
+        <div class="dropdown-trigger">
+            <button class="button has-background-dark has-text-white" aria-haspopup="true" aria-controls="dropdown-menu">
+                <span>Choose Month</span>
+                <span class="icon is-small">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+            </button>
+        </div>
+
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+                <a href="/monthlyExpenses/January" class="dropdown-item">
+                    January
+                </a>
+                <a href="/monthlyExpenses/February" class="dropdown-item">
+                    February
+                </a>
+                <a href="/monthlyExpenses/March" class="dropdown-item">
+                    March
+                </a>
+                <a href="/monthlyExpenses/April" class="dropdown-item">
+                    April
+                </a>
+                <a href="/monthlyExpenses/May" class="dropdown-item">
+                    May
+                </a>
+                <a href="/monthlyExpenses/June" class="dropdown-item">
+                    June
+                </a>
+                <a href="/monthlyExpenses/July" class="dropdown-item">
+                    July
+                </a>
+                <a href="/monthlyExpenses/August" class="dropdown-item">
+                    August
+                </a>
+                <a href="/monthlyExpenses/September" class="dropdown-item">
+                    September
+                </a>
+                <a href="/monthlyExpenses/October" class="dropdown-item">
+                    October
+                </a>
+                <a href="/monthlyExpenses/November" class="dropdown-item">
+                    November
+                </a>
+                <a href="/monthlyExpenses/December" class="dropdown-item">
+                    December
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <canvas id="monthlyExpenses"></canvas>
 </div>
 
 <script>
-    var ctx = document.getElementById('monthlyReport').getContext('2d');
+    var ctx = document.getElementById('monthlyExpenses').getContext('2d');
 
     const data = {
         labels: {{ labels }},
         datasets: [{
-          label: '{{ month }}',
-          data: {{ values }},
-          fill: true,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.4
+            label: '{{ month }}',
+            data: {{ values }},
+            fill: true,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.4
         }]
       };
 
