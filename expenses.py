@@ -239,8 +239,8 @@ def monthlyExpenses():
     
     # for each expense
     for expense in expenses_list:
-        # if expense is from this month
-        if int(expense.date.split('-')[1]) == int(current_month):
+        # if expense is from this month and from current year
+        if int(expense.date.split('-')[1]) == int(current_month) and int(expense.date.split('-')[0]) == int(date.today().strftime("%Y")):
             if int(expense.date.split('-')[2]) in days:
                 # add expense amount to the corresponding day
                 expenses_amounts[int(expense.date.split('-')[2]) - 1] += int(expense.amount.split()[0])
@@ -268,8 +268,8 @@ def monthlyExpenses_other(month):
     
     # for each expense
     for expense in expenses_list:
-        # if expense is from this month
-        if int(expense.date.split('-')[1]) == int(current_month):
+        # if expense is from this month and from current year
+        if int(expense.date.split('-')[1]) == int(current_month) and int(expense.date.split('-')[0]) == int(date.today().strftime("%Y")):
             if int(expense.date.split('-')[2]) in days:
                 # add expense amount to the corresponding day
                 expenses_amounts[int(expense.date.split('-')[2]) - 1] += int(expense.amount.split()[0])
