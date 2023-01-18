@@ -138,11 +138,17 @@ def yearlyExpenses():
         
     current_year = date.today().strftime("%Y")    
     
+    years_list = []
+
     for expense in expenses_list:
         # if expense is from this year
         if expense.date.split('-')[0] == date.today().strftime("%Y"):
             # add expense to the corresponding month
             expenses_map[getMonth(expense.date.split('-')[1])].append(expense)
+        # get previous years present in database
+        if int(expense.date.split('-')[0]) not in years_list:
+            years_list.append(int(expense.date.split('-')[0]))
+
     
     # calculate monthly sums
     monthly_sums = []
@@ -156,7 +162,60 @@ def yearlyExpenses():
      
     months_list = list(expenses_map.keys())        
                 
-    return render_template('yearlyExpenses.html', labels=months_list, values=monthly_sums, year=current_year)
+    return render_template('yearlyExpenses.html', labels=months_list, values=monthly_sums, year=current_year, years_list=years_list)
+
+@expenses.route('/yearlyExpenses/<year>')
+@login_required
+def yearlyExpenses_other(year):
+    expenses_list = loads(current_user.expenses).expenses
+    
+    expenses_map = {}
+    expenses_map["January"] = []
+    expenses_map["February"] = []
+    expenses_map["March"] = []
+    expenses_map["April"] = []
+    expenses_map["May"] = []
+    expenses_map["June"] = []
+    expenses_map["July"] = []
+    expenses_map["August"] = []
+    expenses_map["September"] = []
+    expenses_map["October"] = []
+    expenses_map["November"] = []
+    expenses_map["December"] = []
+        
+    current_year = year   
+        
+    years_list = []
+        
+    for expense in expenses_list:
+        # if expense is from this year
+        if expense.date.split('-')[0] == current_year:
+            # add expense to the corresponding month
+            expenses_map[getMonth(expense.date.split('-')[1])].append(expense)
+        # get previous years present in database
+        if int(expense.date.split('-')[0]) not in years_list:
+            years_list.append(int(expense.date.split('-')[0]))
+        
+    # sort years list
+    years_list.sort(reverse=True)    
+    
+    # calculate monthly sums
+    monthly_sums = []
+    for month in expenses_map:
+        sum = 0
+        for expense in expenses_map[month]:
+            expense_int = int(expense.amount.split()[0])
+            sum += int(expense_int)
+        monthly_sums.append(sum)
+     
+     
+    months_list = list(expenses_map.keys())  
+     
+    print(years_list) 
+                    
+    return render_template('yearlyExpenses.html', labels=months_list, values=monthly_sums, year=current_year, years_list=years_list)
+
+
 
 @expenses.route('/monthlyExpenses')
 @login_required

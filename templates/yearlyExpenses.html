@@ -9,7 +9,32 @@
     <h1 class="subtitle has-text-weight-bold">Yearly Report</h1>
 
     <p>Here is the yearly report for the year {{ year }}</p>
-<canvas id="yearlyReport"></canvas>
+</div>
+
+<div>
+  <div class="dropdown is-hoverable">
+    <div class="dropdown-trigger">
+      <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span>Year</span>
+        <span class="icon is-small">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+
+    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+      <div class="dropdown-content">
+          {% for past_year in years_list %}
+            <a href="/yearlyExpenses/{{ past_year }}" class="dropdown-item">
+              {{ past_year }}
+            </a>
+          {% endfor %}
+      </div>
+    </div>
+</div>
+
+<div>
+  <canvas id="yearlyReport"></canvas>
 </div>
 
 <script>
