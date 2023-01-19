@@ -13,6 +13,7 @@ class Expense:
         self.amount = amount
         self.date = date
         self.category = category
+        # unique id for each expense
         self.id = uuid.uuid4()
     
 class ExpensesList:
@@ -45,7 +46,6 @@ class ExpensesList:
 @login_required
 def addExpense():
     today = date.today()
-    
     return render_template('addExpense.html', date=today)
     
 @expenses.route('/addExpense', methods=['POST'])
