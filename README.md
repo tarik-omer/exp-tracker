@@ -24,23 +24,9 @@ For local running:
 
 - make install -> installs required packages
 - make build -> set required environment variables
-- make run -> activates app on 'http://127.0.0.1:5000'
+- make run -> activates app on 'http://127.0.0.1:5000' (localhost)
 
 For live usage, sign up and join us on [Money Rails - Expense Tracker](http://moneyrails.pythonanywhere.com/).
-
-### Team Members
-
-    Omer Tarik          - build & deploy, routing, bugfixing
-    Preda Diana         - authentification, front-end
-    Calota Alexandra    - expense management
-    Tarsoaga Vincentiu  - expense charting
-
-### Comments
-
-- It was an interesting project
-- Offered the team insight about web development and what it means
-- First actual contact with the backend of a webapp for everyone involved
-- First contact with database management
 
 ### Improvements
 
